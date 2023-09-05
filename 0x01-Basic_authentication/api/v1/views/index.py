@@ -33,3 +33,12 @@ def unauth() -> str:
         - if user is not authorized
     """
     return abort(401)
+
+
+@app_views.route('/forbidden', strict_slashes=False)
+def forbid() -> str:
+    """ GET /api/v1/forbidden
+    Return:
+        - if forbidden
+    """
+    return abort(403)

@@ -15,7 +15,15 @@ class Auth():
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ A public method of class Auth
         """
-        return False
+        if path is None:
+            return True
+        if excluded_paths is None or excluded_paths is [""]:
+            return True
+        if path in excluded_paths or path + "/" in excluded_paths:
+            return False
+        else:
+            return True
+        # return False
 
     def authorization_header(self, request=None) -> str:
         """ Another public method

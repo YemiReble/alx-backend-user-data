@@ -49,7 +49,7 @@ def before_any_request():
     #    if request.path not in auth.require_auth(url, url):  # Refactor
     #        return
     #    break
-    if auth.require_auth(request.path, reqs) == True:
+    if auth.require_auth(request.path, reqs):
         return
     if auth.authorization_header(request) is None:
         return abort(401)

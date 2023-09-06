@@ -45,12 +45,12 @@ def before_any_request():
     reqs = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
     if auth is None:
         return None
-    for url in reqs:
-        if request.path not in auth.require_auth(url, url):  # Refactor
-            return
-        break
-    # if auth.require_auth(request.path, reqs) == True:
-    #    return
+    # for url in reqs:
+    #    if request.path not in auth.require_auth(url, url):  # Refactor
+    #        return
+    #    break
+    if auth.require_auth(request.path, reqs) == True:
+        return
     if auth.authorization_header(request) is None:
         return abort(401)
     if auth.current_user(request) is None:

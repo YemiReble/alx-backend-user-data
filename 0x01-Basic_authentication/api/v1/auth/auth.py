@@ -23,12 +23,18 @@ class Auth():
             return False
         else:
             return True
-        # return False
 
     def authorization_header(self, request=None) -> str:
-        """ Another public method
+        """ Another public method to check authorization
+            header
         """
-        return None
+        if request is None:
+            return None
+        if 'Authorization' in request.headers:
+            headerr = request.headers['Authorization']
+            return headerr
+        else:
+            return None
 
     def current_user(self, request=None) -> TypeVar('User'):
         """ Current User request method

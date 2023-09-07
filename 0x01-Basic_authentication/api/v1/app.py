@@ -56,16 +56,6 @@ def before_any_request():
 
 
 if __name__ == "__main__":
-    """
-    Main entry point for the application.
-
-    Reads the environment variables for the API host and port,
-    and the authentication type.
-
-    If authentication is enabled, imports the Auth class from
-    the api.v1.auth.auth module.
-    Starts the Flask app.
-    """
     host = getenv("API_HOST", "0.0.0.0")
     port = getenv("API_PORT", "5000")
     auth = getenv("AUTH_TYPE", 'auth')

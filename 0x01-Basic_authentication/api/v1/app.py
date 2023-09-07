@@ -6,7 +6,6 @@ from os import getenv
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, request
 from flask_cors import (CORS, cross_origin)
-# from api.v1.auth.auth import Auth
 import os
 
 
@@ -44,13 +43,12 @@ def before_any_request():
     """
     reqs = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
     if auth is None:
-        return None
-    # for url in reqs:
-    #    if request.path not in auth.require_auth(url, url):  # Refactor
-    #        return
-    #    break
-    if auth.require_auth(request.path, reqs):
         return
+    for url in reqs:
+        if auth.require_auth(request.path, url) is True:
+            return
+    # if any(auth.require_auth(request.path, url) for url in reqs):
+    #    return
     if auth.authorization_header(request) is None:
         return abort(401)
     if auth.current_user(request) is None:
@@ -58,10 +56,20 @@ def before_any_request():
 
 
 if __name__ == "__main__":
+    """
+    Main entry point for the application.
+
+    Reads the environment variables for the API host and port,
+    and the authentication type.
+
+    If authentication is enabled, imports the Auth class from
+    the api.v1.auth.auth module.
+    Starts the Flask app.
+    """
     host = getenv("API_HOST", "0.0.0.0")
     port = getenv("API_PORT", "5000")
     auth = getenv("AUTH_TYPE", 'auth')  # Look into here
     if auth:
         from api.v1.auth.auth import Auth
         auth = Auth()
-    app.run(host=host, port=port, auth=auth)
+    app.run(host=host, port=port)

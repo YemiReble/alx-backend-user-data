@@ -46,7 +46,7 @@ class BasicAuth(Auth):
             base_byte = base64_authorization_header
             data = base64.b64decode(base_byte)
             return data
-        except:
+        except BaseException:
             return None
 
     def extract_user_credentials(

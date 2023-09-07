@@ -45,10 +45,8 @@ def before_any_request():
     if auth is None:
         return
     for url in reqs:
-        if auth.require_auth(request.path, url) is True:
+        if auth.require_auth(request.path, url) is False:
             return
-    # if any(auth.require_auth(request.path, url) for url in reqs):
-    #    return
     if auth.authorization_header(request) is None:
         return abort(401)
     if auth.current_user(request) is None:

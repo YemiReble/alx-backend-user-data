@@ -5,6 +5,7 @@ that inherits from Auth Class from auth
 
 
 from api.v1.auth.auth import Auth
+from encode
 
 
 class BasicAuth(Auth):
@@ -42,14 +43,12 @@ class BasicAuth(Auth):
         if not isinstance(base64_authorization_header, str):
             return None
         # Hard review on this spot
-        # try:
-        #    if variable is not base64:
-        #        return None
-        #    base64_authorization_header.encode('utf-8')
-        #    else:
-        #        return the encoded result
-        # except:
-        #    return Exception
+        try:
+            base_byte = base64_authorization_header.encode()
+            data = base64.b64encode(base_byte)
+            return deta.decode('ascci')
+        except:
+            return None
 
     def extract_user_credentials(
             self, decoded_base64_authorization_header: str) -> (str, str):

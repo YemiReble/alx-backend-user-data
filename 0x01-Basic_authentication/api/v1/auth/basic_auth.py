@@ -5,7 +5,7 @@ that inherits from Auth Class from auth
 
 
 from api.v1.auth.auth import Auth
-from encode
+import base64
 
 
 class BasicAuth(Auth):
@@ -30,8 +30,8 @@ class BasicAuth(Auth):
         if 'Basic ' not in authorization_header:
             return None
         else:
-            base64 = authorization_header.split(' ')
-            for base in base64[1:]:
+            base_64 = authorization_header.split(' ')
+            for base in base_64[1:]:
                 return base
 
     def decode_base64_authorization_header(
@@ -42,11 +42,10 @@ class BasicAuth(Auth):
             return None
         if not isinstance(base64_authorization_header, str):
             return None
-        # Hard review on this spot
         try:
-            base_byte = base64_authorization_header.encode()
-            data = base64.b64encode(base_byte)
-            return deta.decode('ascci')
+            base_byte = base64_authorization_header
+            data = base64.b64decode(base_byte)
+            return data
         except:
             return None
 

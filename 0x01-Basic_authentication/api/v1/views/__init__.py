@@ -2,7 +2,6 @@
 """ DocDocDocDocDocDoc
 """
 from api.v1.views.users import *
-# Code section commented because of circular imort error
 from api.v1.views.index import *
 # from models.user import User
 from flask import Blueprint

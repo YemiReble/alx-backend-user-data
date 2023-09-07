@@ -45,7 +45,7 @@ class BasicAuth(Auth):
         try:
             base_byte = base64_authorization_header
             data = base64.b64decode(base_byte)
-            return data
+            return data.decode('ascii')
         except BaseException:
             return None
 

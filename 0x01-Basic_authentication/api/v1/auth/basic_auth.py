@@ -96,6 +96,7 @@ class BasicAuth(Auth):
                 if enco is not None:
                     email, deco = self.extract_user_credentials(enco)
                     if deco is not None:
-                        user_creden = self.user_object_from_credentials(email, deco)
+                        user_creden = self.user_object_from_credentials(
+                            email, deco)
                         return user_creden
         return

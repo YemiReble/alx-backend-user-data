@@ -15,15 +15,6 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
 
 
-authenticate = getenv("AUTH_TYPE")
-if authenticate == 'auth':
-    from api.v1.auth.auth import Auth
-    auth = Auth()
-if authenticate == 'basic_auth':
-    from api.v1.auth.basic_auth import BasicAuth
-    auth = BasicAuth()
-
-
 @app.errorhandler(404)
 def not_found(error) -> str:
     """ Not found handler
@@ -69,12 +60,15 @@ def before_any_request():
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
     port = getenv("API_PORT", "5000")
-    # authenticate = getenv("AUTH_TYPE")
-    # if authenticate == 'auth':
-    #    from api.v1.auth.auth import Auth
-    #    auth = Auth()
-    # elif authenticate == 'basic_auth':
-    #    from api.v1.auth.basic_auth import BasicAuth
-    #    auth = BasicAuth()
+    authenticate = getenv("AUTH_TYPE")
+    if authenticate == 'auth':
+        from api.v1.auth.auth import Auth
+        auth = Auth()
+    if authenticate == 'basic_auth':
+        from api.v1.auth.basic_auth import BasicAuth
+        auth = BasicAuth()
+    if authenticate == 'session':
+        from api.v1.auth.session_auth import SessionAuth
+        auth = SessionAuth()
 
     app.run(host=host, port=port)

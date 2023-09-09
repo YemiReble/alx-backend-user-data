@@ -128,5 +128,5 @@ def update_user(user_id: str = None) -> str:
 
 @app_views.route('/users/me', methods=['GET'], strict_slashes=False)
 def user_me() -> str:
-    """ Return User Authentication """
+    """ Return Authenticated Users """
     return view_all_users()

@@ -129,5 +129,4 @@ def update_user(user_id: str = None) -> str:
 @app_views.route('/users/me', methods=['GET'], strict_slashes=False)
 def user_me() -> str:
     """ Return User Authentication """
-    all_users = [user.to_json() for user in User.all()]
-    return jsonify(all_users)
+    return view_all_users()

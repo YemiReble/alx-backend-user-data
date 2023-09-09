@@ -9,6 +9,6 @@ class SessionAuth():
     """ User Session Class
     """
     def __init__():
-        """ User Session Initialization
+        """ User Session-Initialization
         """
         super().__init__()

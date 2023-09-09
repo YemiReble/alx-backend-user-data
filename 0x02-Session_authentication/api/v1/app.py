@@ -67,7 +67,7 @@ if __name__ == "__main__":
     if authenticate == 'basic_auth':
         from api.v1.auth.basic_auth import BasicAuth
         auth = BasicAuth()
-    if authenticate == 'session':
+    if authenticate == 'session_auth':
         from api.v1.auth.session_auth import SessionAuth
         auth = SessionAuth()
 

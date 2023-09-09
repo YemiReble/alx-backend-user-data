@@ -51,6 +51,8 @@ def forbidden(error) -> str:
 def before_any_request():
     """ This function runs before any request is made
         to the API Application
+    Return:
+        only authenticated user, otherise None
     """
     reqs = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
     if auth is None:
@@ -64,8 +66,8 @@ def before_any_request():
     current_usr = auth.current_user(request)
     if current_usr is None:
         return abort(403)
-    # else:
-    #    request.current_user = current_usr
+    else:
+        request.current_user = current_usr
 
 
 if __name__ == "__main__":

@@ -18,10 +18,10 @@ authenticate = getenv("AUTH_TYPE")
 if authenticate == 'auth':
     from api.v1.auth.auth import Auth
     auth = Auth()
-if authenticate == 'basic_auth':
+elif authenticate == 'basic_auth':
     from api.v1.auth.basic_auth import BasicAuth
     auth = BasicAuth()
-if authenticate == 'session_auth':
+elif authenticate == 'session_auth':
     from api.v1.auth.session_auth import SessionAuth
     auth = SessionAuth()
 

@@ -42,10 +42,10 @@ class DB:
     def find_user_by(self, user_data: str):
         """ Find User by their info
         """
-        if user_data = None:
+        if user_data is None:
             raise NoResultFound
         if not isinstance(user_data, str):
             raise InvalidRequestError
-        
+
         for userinfo in user_data:
             return userinfo[0]

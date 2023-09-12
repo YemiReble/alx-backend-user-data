@@ -39,13 +39,13 @@ class DB:
         User.email = email
         User.hash_password = hash_password
 
-    def find_user_by(self, user_data: str):
+    def find_user_by(self, **kwargs: str):
         """ Find User by their info
         """
-        if user_data is None:
-            raise NoResultFound
-        if not isinstance(user_data, str):
-            raise InvalidRequestError
-
-        for userinfo in user_data:
-            return userinfo[0]
+        try:
+            query = query(User).filter(User.id.in_(kwargs.values()))
+            if user_data is None or query is None:
+                raise NoResultFound
+            if not isinstance(user_data, str):
+                raise InvalidRequestError
+        return query.first()

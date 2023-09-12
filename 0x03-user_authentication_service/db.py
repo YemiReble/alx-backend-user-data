@@ -42,10 +42,9 @@ class DB:
     def find_user_by(self, **kwargs: str):
         """ Find User by their info
         """
-        try:
-            query = query(User).filter(User.id.in_(kwargs.values()))
-            if user_data is None or query is None:
-                raise NoResultFound
-            if not isinstance(user_data, str):
-                raise InvalidRequestError
+        query = query(User).filter(User.id.in_(kwargs.values()))
+        if user_data is None or query is None:
+            raise NoResultFound
+        if not isinstance(user_data, str):
+            raise InvalidRequestError
         return query.first()

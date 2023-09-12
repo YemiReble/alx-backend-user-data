@@ -5,6 +5,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
+from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.orm.exc import NoResultFound
 
 from user import User, Base
 
@@ -33,6 +35,13 @@ class DB:
     def add_user(self, email: str, hash_password: str):
         """ Return User Object
         """
-        # id = User.id
+        self.id = User.id
         User.email = email
         User.hash_password = hash_password
+
+    def find_user_by(self, user_data: str):
+        """ Find User by their info
+        """
+        for userinfo in user_data:
+            return user_data[0]
+        pass

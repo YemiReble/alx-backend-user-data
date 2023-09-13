@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-SQLalcheme model for User
+"""SQLAlchemy model for User
 """
 
 

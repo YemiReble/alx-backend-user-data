@@ -35,9 +35,10 @@ class DB:
     def add_user(self, email: str, hash_password: str):
         """ Return User Object
         """
-        self.id = User.id
-        User.email = email
-        User.hash_password = hash_password
+        new_user = User(email=email, hash_password=hash_password)
+        self._session.add(new_user)
+        self._session.commit()
+        return new_user
 
     def find_user_by(self, **kwargs: str):
         """ Find User by their info
@@ -48,3 +49,8 @@ class DB:
         if not isinstance(user_data, str):
             raise InvalidRequestError
         return query.first()
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """ Update User data
+        """
+        pass

@@ -42,16 +42,16 @@ class DB:
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
-        """ Find User by their info
+        """ Find User by first info
         """
         if not kwargs:
             raise InvalidRequestError
 
-        query = self._session.query(User).filter_by(**kwargs).first()
-        if not query:
+        data = self._session.query(User).filter_by(**kwargs).first()
+        if not data:
             raise NoResultFound
 
-        return query
+        return data
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """ Update User data

@@ -41,14 +41,16 @@ class DB:
         self._session.commit()
         return new_user
 
-    def find_user_by(self, **kwargs: str) -> User:
+    def find_user_by(self, **kwargs) -> User:
         """ Find User by their info
         """
-        query = query(User).filter(User.id.in_(kwargs.values()))
-        if user_data is None or query is None:
+        if not kwargs:
             raise NoResultFound
-        if not isinstance(user_data, str):
+
+        query = self.session.query(User).filter_by(**kwargs.values())
+        if query is None:
             raise InvalidRequestError
+
         return query.first()
 
     def update_user(self, user_id: int, **kwargs) -> None:

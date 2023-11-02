@@ -12,4 +12,5 @@ def filter_datum(fields: List[str], redaction: str,
     """ Return User data filtered message """
     for field in fields:
         pattern = f"{field}=[^{separator}]*"
-    return re.sub(pattern, f"{field}={redaction}", message)
+        message = re.sub(pattern, f"{field}={redaction}", message)
+    return message

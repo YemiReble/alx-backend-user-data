@@ -4,7 +4,7 @@ A program that use re.sub to perform the
 substitution with a single regex.python3
 """
 import re
-form typing import List
+from typing import List
 
 
 def filter_datum(fields, redaction, message, separator) -> List[str]:
